@@ -1,15 +1,10 @@
 class Solution {
     public int countEven(int num) {
         int cnt=0;
-       if(num<10 && num%2==1){
+       if(num<10 ){
            cnt+=num/2;
        }
-        else if(num<10){
-            while(num%2==0){
-                cnt++;
-                num/=2;
-            }
-        }else{
+      else{
                 for(int i=1;i<=num;i++){
                     int dsum=digitsum(i);
                     if(dsum%2==0){
