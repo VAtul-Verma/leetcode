@@ -36,7 +36,14 @@ class Solution{
     public static int kthSmallest(int[] arr, int l, int r, int k) 
     { 
         //Your code here
-        Arrays.sort(arr);
-        return arr[k-1];
+        int ans=Integer.MIN_VALUE;
+       PriorityQueue<Integer>p=new PriorityQueue<>();
+       for(int i=0;i<arr.length;i++){
+           p.add(arr[i]);
+       }
+       for(int i=0;i<k;i++){
+          ans= p.remove();
+       }
+       return ans;
     } 
 }
