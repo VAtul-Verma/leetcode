@@ -43,11 +43,14 @@ class Compute {
     
     public void rotate(int arr[], int n)
     {
-        int temp=arr[n-1];
-        for(int i=arr.length-1;i>0;i--){
-            arr[i]=arr[i-1];
-        }
-        arr[0]=temp;
+       int l=0;
+       int r=arr.length-1;
+       while(l<r){
+           int temp=arr[l];
+           arr[l]=arr[r];
+           arr[r]=temp;
+           l++;
+       }
     }
     public static void rotate(int []arr,int l,int r){
         while(l<r){
