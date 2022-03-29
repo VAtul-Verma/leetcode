@@ -61,16 +61,12 @@ class Solution
     {
         // code here 
         ArrayList<Integer>ans=new ArrayList<>();
-        HashSet<Integer>set=new HashSet<>();
         int i=0;
         int j=0;
         int k=0;
         while(i<n1 && j<n2 && k<n3){
             if(A[i]==B[j]  && B[j]==C[k]){
-                if(!set.contains(A[i])){
-                    set.add(A[i]);
-                    ans.add(A[i]);
-                }
+                ans.add(A[i]);
                 i++;
                 j++;
                 k++;
@@ -81,7 +77,19 @@ class Solution
             }else {
                 k++;
             }
+            if(i>0){
+            int x=A[i-1];
+            while(i<n1 &&A[i]==x )i++;
+            }
+            if(j>0){
+             int y=B[j-1];
+            while(j<n2 && B[j]==y )j++;
+            }
+            if(k>0){
+             int z=C[k-1];
+            while(k<n3 && C[k]==z)k++;
+            }
         }
-       return ans;
+        return ans;
     }
 }
