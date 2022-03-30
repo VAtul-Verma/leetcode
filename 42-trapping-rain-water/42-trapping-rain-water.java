@@ -1,30 +1,23 @@
 class Solution {
-    public int []leftmax(int []height){
-        int [] res= new int[height.length];
-        res[0]=height[0];
-        for(int i=1;i<height.length;i++){
-            res[i]=Math.max(height[i],res[i-1]);
-        }
-        return res;
-            
-    }
-    
-     public int []rightmax(int []height){
-        int [] res= new int[height.length];
-        res[height.length-1]=height[height.length-1];
-        for(int i=height.length-2;i>=0;i--){
-            res[i]=Math.max(height[i],res[i+1]);
-        }
-        return res;
-            
-    }
-    public int trap(int[] height) {
-        int []lmax=leftmax(height);
-        int []rmax=rightmax(height);
-        int water=0;
-        for(int i=0;i<height.length;i++){
-            water+=Math.min(lmax[i],rmax[i])-height[i];
-        }
-return water;
+    public int trap(int[] arr) {
+        int n=arr.length;
+        int left=0;
+       int right=n-1;
+       int maxleft=0;
+       int maxright=0;
+       int ans=0;
+        
+       while(left<=right){
+           if(arr[left]<=arr[right]){
+               if(arr[left]>=maxleft)maxleft=arr[left];
+               else ans+=maxleft-arr[left];
+               left++;
+           }else{
+               if(arr[right]>=maxright)maxright=arr[right];
+               else ans+=maxright-arr[right];
+               right--;
+           }
+       }
+            return ans;
     }
 }
