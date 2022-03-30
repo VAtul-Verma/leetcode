@@ -39,22 +39,23 @@ class Solution{
     // Function to find the trapped water between the blocks.
     static long trappingWater(int arr[], int n) { 
         // Your code here
-        long []presum=new long[n];
-        long []suffisum=new long[n];
-        presum[0]=arr[0];
+       int left=0;
+       int right=n-1;
+       long maxleft=0;
+       long maxright=0;
+       long ans=0;
         
-        for(int i=1;i<n;i++){
-            presum[i]=Math.max(arr[i],presum[i-1]);
-            
-        }
-        suffisum[n-1]=arr[n-1];
-        for(int i=n-2;i>=0;i--){
-            suffisum[i]=Math.max(suffisum[i+1],arr[i]);
-        }
-        long ans=0;
-        for(int i=0;i<n;i++){
-            ans+=Math.min(presum[i],suffisum[i])-arr[i];
-        }
+       while(left<=right){
+           if(arr[left]<=arr[right]){
+               if(arr[left]>=maxleft)maxleft=arr[left];
+               else ans+=maxleft-arr[left];
+               left++;
+           }else{
+               if(arr[right]>=maxright)maxright=arr[right];
+               else ans+=maxright-arr[right];
+               right--;
+           }
+       }
             return ans;
     } 
 }
