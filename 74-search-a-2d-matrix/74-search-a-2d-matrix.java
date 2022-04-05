@@ -1,16 +1,18 @@
 class Solution {
     public boolean searchMatrix(int[][] arr, int target) {
-        int i=0;
-        int j=arr[0].length-1;
-        while(i<arr.length && j>=0){
-            if(arr[i][j]==target){
-                return true;
-            }else if(arr[i][j]>target){
-                j--;
-            }else{
-                i++;
-            }
-        }
+    int n=arr.length;
+        int m=arr[0].length;
+        int l=0;
+        int h=n*m-1;
+    while(l<=h){
+        int mid=l+(h-l)/2;
+        if(arr[mid/m][mid%m]==target){
+            return true;
+        }else if (arr[mid/m][mid%m]<target){   //assume 2d array as 1d array      //row num=mid/m      //col=mid%m
+            l=mid+1;
+        }else {
+            h=mid-1;
+        }    }
         return false;
     }
 }
