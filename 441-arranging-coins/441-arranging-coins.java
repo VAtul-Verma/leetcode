@@ -1,16 +1,16 @@
 class Solution {
     public int arrangeCoins(int n) {
-        if(n==1){
-            return 1;
+        long lo=0;
+        long hi=n;
+        
+        while(lo<=hi) {
+            long mid=lo+(hi-lo)/2;
+            long coins=mid*(mid+1)/2; //coins used
+            
+            if(coins==n) return (int)mid;
+            else if(coins<n) lo=mid+1; //coins used less than limit given ->use more coins ->increase lo
+            else hi=mid-1;
         }
-        int temp=n;
-        int cnt=0;
-        for(int i=1;i<=n;i++){
-            n=n-i;
-            if(n<=temp){
-                cnt++;
-            }
-        }
-        return cnt;
+        return (int)hi;
     }
 }
