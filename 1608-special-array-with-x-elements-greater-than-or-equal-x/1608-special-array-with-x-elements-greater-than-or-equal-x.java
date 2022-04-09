@@ -1,16 +1,17 @@
 class Solution {
     public int specialArray(int[] nums) {
-     for(int i=1;i<1001;i++){
-         int cnt=0;
-         for(int val:nums){
-             if(val>=i){
-                 cnt++;
-             }
-         }
-         if(cnt==i){
-                 return i;
-             }
-     }   
+    int []cnt=new int[1001];
+        for(int val:nums){
+            cnt[val]++;
+        }
+        int total=nums.length;
+        for(int i=0;i<1001;i++){
+            if(i==total){
+                return i;
+            }
+            total=total-cnt[i];
+        }
         return -1;
     }
+    
 }
