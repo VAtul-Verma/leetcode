@@ -9,14 +9,29 @@
  * }
  */
 class Solution {
+    // public ListNode reverseList(ListNode head) {        //recursive code
+    //     if(head==null || head.next==null){
+    //         return head;
+    //     }
+    //     ListNode newhead=reverseList(head.next);
+    //     ListNode headnt=head.next;
+    //     head.next.next=head;
+    //     head.next=null;
+    //     return newhead;
+    // }
     public ListNode reverseList(ListNode head) {
         if(head==null || head.next==null){
             return head;
         }
-        ListNode newhead=reverseList(head.next);
-        ListNode headnt=head.next;
-        head.next.next=head;
-        head.next=null;
-        return newhead;
+        ListNode curr=head,prev=null;
+        
+        while(curr!=null){
+        ListNode newhead=curr.next;
+       curr.next=prev;
+        prev=curr;
+        curr=newhead;
+    }
+        
+        return prev;
     }
 }
