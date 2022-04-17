@@ -7,8 +7,6 @@ class Solution {
             mcnt++;
          }else if(nums[i]==0){
              return 0;
-         }else{
-             pcnt++;
          }
      }   
         return mcnt%2==0?1:-1;
