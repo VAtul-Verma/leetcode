@@ -11,7 +11,11 @@ class Solution {
         if(node==null){
             return ;
         }
+        if(node.next==null){ //tail node
+            node=null;
+        }else{
        node.val=node.next.val;
         node.next=node.next.next;
+        }
     }
 }
