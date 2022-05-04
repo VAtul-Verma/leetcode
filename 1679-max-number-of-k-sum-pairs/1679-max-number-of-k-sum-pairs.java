@@ -5,16 +5,15 @@ class Solution {
         int j=nums.length-1;
         int cnt=0;
         while(i<j){
-            if(nums[i]+nums[j]==k){
+            if(nums[i]+nums[j]==k){  //if sum is equal to k increase cnt  ,i and decrease j;
                 cnt++;
-                nums[i]=-1;
-                nums[j]=-1;
+               
                 i++;
                 j--;
                 
-            }else if(nums[i]+nums[j]<k){
+            }else if(nums[i]+nums[j]<k){  //if sum is less than k increase i;
                 i++;
-            }else if(nums[i]+nums[j]>k)
+            }else if(nums[i]+nums[j]>k)//if sum is less than k decrease j;
                 j--;
             }
         return cnt;
