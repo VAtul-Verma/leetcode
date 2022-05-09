@@ -4,10 +4,20 @@ class Solution {
         return tribonaccihelper(n,dp);
     }
     public int tribonaccihelper(int n,int []dp){
-        if(n<=1)return dp[n]=n;;
-        if(n==2)return dp[2]=1;
+        for(int i=0;i<=n;i++){
+        if(i<=1){
+            dp[i]=i;
+            continue;
+        }
+        if(i==2){
+            dp[i]=1;
+            continue;
+        }
         
-        if(dp[n]!=0)return dp[n];
-        return dp[n]=tribonaccihelper(n-1,dp)+tribonaccihelper(n-2,dp)+tribonaccihelper(n-3,dp);
+       
+         dp[i]=dp[i-1]+dp[i-2]+dp[i-3];
+            
+        }
+        return dp[n];
     }
 }
