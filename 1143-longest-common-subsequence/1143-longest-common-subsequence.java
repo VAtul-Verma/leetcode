@@ -6,24 +6,32 @@ class Solution {
         for(int []d:dp){
             Arrays.fill(d,-1);
         }
-       return longestCommonSubsequence_memo(s1,s2,n,m,dp);
         
+       int ans=longestCommonSubsequence_memo(s1,s2,n,m,dp);
+       
+        return ans;
         
     }
-    public static int longestCommonSubsequence_memo(String s1,String s2,int n,int m,int [][]dp){
-        if(n==0 || m==0){
-            return dp[n][m]=0;    //no common subsequence
-        }
-        if(dp[n][m]!=-1){
-            return dp[n][m];
-        }
-        int a=longestCommonSubsequence_memo(s1,s2,n-1,m-1,dp);
-        int b=longestCommonSubsequence_memo(s1,s2,n-1,m,dp);
-        int c=longestCommonSubsequence_memo(s1,s2,n,m-1,dp);
+    public static int longestCommonSubsequence_memo(String s1,String s2,int N,int M,int [][]dp){
+        for(int n=0;n<=N;n++){
+            for(int m=0;m<=M;m++){
+                if(n==0 || m==0){
+             dp[n][m]=0;//no common subsequence
+            continue;
+                }
+        int a=dp[n-1][m-1];
+        int b=dp[n][m-1];
+        int c=dp[n-1][m];
         if(s1.charAt(n-1)==s2.charAt(m-1)){
-            return dp[n][m]=a+1;
+             dp[n][m]=a+1;
         }else{
-            return dp[n][m]=Math.max(b,c);
+        dp[n][m]=Math.max(b,c);
+        } 
+            }
         }
+        return dp[N][M];
+       
+    
+        
     }
 }
