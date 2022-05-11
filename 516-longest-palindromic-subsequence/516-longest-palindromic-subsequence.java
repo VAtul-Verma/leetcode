@@ -10,26 +10,19 @@ class Solution {
         return ans;
         
     }
-    public int helper(String s,int I,int J,int[][]dp){
-        int n=s.length();
-        for(int gap=0;gap<n;gap++){
-            for(int i=0,j=gap;j<n;i++,j++){
-                 if(i>=j){
-            dp[i][j]=i==j?1:0;
-                     continue;
+    public int helper(String s,int i,int j,int[][]dp){
+        if(i>=j){
+            return dp[i][j]=i==j?1:0;
         }
         if(dp[i][j]!=0)return dp[i][j];
         
-        int a=dp[i+1][j-1];
-        int b=dp[i+1][j];
-        int c=dp[i][j-1];
+        int a=helper(s,i+1,j-1,dp);
+        int b=helper(s,i+1,j,dp);
+        int c=helper(s,i,j-1,dp);
         if(s.charAt(i)==s.charAt(j)){
-            dp[i][j] =a+2;
+            return dp[i][j]=a+2;
         }else{
-             dp[i][j]=Math.max(b,c);
+            return dp[i][j]=Math.max(b,c);
         }
-            }
-        }
-       return dp[I][J];
     }
 }
