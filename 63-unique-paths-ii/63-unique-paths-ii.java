@@ -1,6 +1,6 @@
 class Solution {
     public int uniquePathsWithObstacles(int[][] obstacleGrid) {
-       
+    
         int n=obstacleGrid.length;
         int m=obstacleGrid[0].length;
          int [][]dp=new int[n][m];
@@ -31,4 +31,5 @@ class Solution {
 
         return dp[er][ec] = count;
      }
+    
 }
