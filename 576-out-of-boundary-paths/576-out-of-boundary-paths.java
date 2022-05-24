@@ -12,7 +12,7 @@ class Solution {
     }
      public int findPathshelper(int n, int m, int k, int sr, int sc,int [][][]dp) {
         if(sr<0 || sc<0 || sr==n || sc==m){
-            return k>=0?1:0;
+            return 1;
         }
          if(k==0)return 0;
          if(dp[sr][sc][k]!=-1)return dp[sr][sc][k];
