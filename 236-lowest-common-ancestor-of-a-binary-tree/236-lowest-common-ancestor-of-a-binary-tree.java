@@ -8,31 +8,25 @@
  * }
  */
 class Solution {
+    TreeNode lca=null;
     public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
-        ArrayList<TreeNode>left= new ArrayList<>();
-            nodetorootpath(root,p,left);
-        ArrayList<TreeNode>right=new ArrayList<>();
-            nodetorootpath(root,q,right);
-        int i=left.size()-1;
-        int j=right.size()-1;
-        while(i>=0 && j>=0){
-            if(left.get(i)==right.get(j)){
-                i--;
-                j--;
-            }else{
-                break;
-            }
-        }
-        return left.get(i+1);
+        
+        find(root,p,q);
+        return lca;
     }
-    public boolean nodetorootpath(TreeNode node,TreeNode d1, ArrayList<TreeNode>ans){
-        if(node==null || d1==null)return false;
-        if(node==d1){
-         ans.add(node);
-            return true ;
+    public boolean find(TreeNode root,TreeNode p,TreeNode q){
+        if(root==null)return false;
+        boolean left=find(root.left,p,q);
+        boolean right=find(root.right,p,q);
+        if(left && right){
+            lca=root;
         }
-        boolean flag=nodetorootpath(node.left,d1,ans) ||nodetorootpath(node.right,d1,ans);
-      if(flag)ans.add(node);
-        return flag;
+        if(root==p || root==q){
+            if(left ||right){
+                lca=root;
+            }
+            return true;
+        }
+        return left || right;
     }
 }
