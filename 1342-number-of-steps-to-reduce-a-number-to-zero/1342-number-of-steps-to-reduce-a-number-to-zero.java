@@ -6,7 +6,7 @@ class Solution {
                 n=n>>>1;
                 cnt++;
             }else{
-                n=n-1;
+                n=n^1;
                 cnt++;
             }
         }
