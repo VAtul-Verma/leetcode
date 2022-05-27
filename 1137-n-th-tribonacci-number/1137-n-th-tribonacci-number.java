@@ -1,18 +1,13 @@
 class Solution {
-    public int tribonacci(int n) {
-        
-        return tribonaccihelper(n);
+    public int tribonacci(int n,int []dp) {
+        if(n<=1)return dp[n]=n;
+        if(n==2)return dp[n]=1;
+        if(dp[n]!=0)return dp[n];
+        dp[n]= tribonacci(n-1,dp)+tribonacci(n-2,dp)+tribonacci(n-3,dp);
+        return dp[n];
     }
-    public int tribonaccihelper(int n){
-      int a=0;
-        int b=1;
-        int c=1;
-        for(int i=0;i<n;i++){
-            int sum=a+b+c;
-            a=b;
-            b=c;
-            c=sum;
-        }
-        return a;
+    public int tribonacci(int n){
+        int []dp=new int[n+1];
+        return tribonacci(n,dp);
     }
 }
