@@ -9,12 +9,9 @@
  */
 class Solution {
     public List<Integer> distanceK(TreeNode root, TreeNode target, int k) {
-        ArrayList<TreeNode>ans=new ArrayList<>();
+        
         List<Integer>fans=new ArrayList<>();
-        nodetorootpath(root,target,ans);
-        for(int i=0;i<ans.size();i++){
-            kleveldown(ans.get(i),k-i,i>0?ans.get(i-1):null,fans);
-        }
+       kdistance(root,target,k,fans);
         return fans;
     }
     public void kleveldown(TreeNode root,int k,TreeNode blocker,List<Integer>ans){
@@ -29,19 +26,23 @@ class Solution {
         kleveldown(root.right,k-1,blocker,ans);
         
     }
-    public boolean nodetorootpath(TreeNode root,TreeNode di,ArrayList<TreeNode>ans){
-        if(root==null){
-            return false;
+    public int kdistance(TreeNode root,TreeNode tar,int k,List<Integer>ans){
+        if(root==null)return -1;  //ans not found;
+        if(root==tar){
+            kleveldown(root,k,null,ans);
+            return 1;  //distance from that node to root;
         }
-        if(root==di){
-            ans.add(root);
-            return true;
+        int leftdistance=kdistance(root.left,tar,k,ans);
+        if(leftdistance!=-1){
+            kleveldown(root,k-leftdistance,root.left,ans);
+            return leftdistance+1;
         }
-      boolean left= nodetorootpath(root.left,di,ans);
-        boolean right=nodetorootpath(root.right,di,ans);
-        if(left || right){
-            ans.add(root);
+        int rightdistance=kdistance(root.right,tar,k,ans);
+        if(rightdistance!=-1){
+            kleveldown(root,k-rightdistance,root.right,ans);
+            return rightdistance+1;
         }
-        return left|| right;
+        return -1;
     }
+  
 }
