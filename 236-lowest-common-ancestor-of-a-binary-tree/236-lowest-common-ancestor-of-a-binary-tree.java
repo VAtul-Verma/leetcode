@@ -33,7 +33,9 @@ class Solution {
         if(root==null)return false;
         boolean self=(root==p || root==q);
         boolean left=Lca(root.left,p,q);
+        if(LCA!=null)return true;
         boolean right=Lca(root.right,p,q);
+        if(LCA!=null)return true;
         if((left && right)|| (left && self)||(right && self)){
             LCA=root;
         }
