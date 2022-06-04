@@ -14,21 +14,29 @@
  * }
  */
 class Solution {
-    public boolean isBalanced(TreeNode root) {
-        if(root==null)return true;
-      return height(root)!=-1;
+    public static class Bpair{
+        boolean isbal=true;
+        int h=-1;
     }
-    public int height(TreeNode root){
+    
+    public Bpair is_Balanced(TreeNode root) {
         if(root==null){
-            return 0;
+            Bpair base=new Bpair();
+        return base;
+    }
+        Bpair lp=is_Balanced(root.left);
+         Bpair rp=is_Balanced(root.right);
+        Bpair mypair=new Bpair();
+        mypair.isbal=lp.isbal && rp.isbal;
+        if(mypair.isbal && Math.abs(lp.h-rp.h)<2){
+            mypair.h=Math.max(lp.h,rp.h)+1;
+        }else{
+            mypair.isbal=false;
         }
-        int left=height(root.left);
-        if(left==-1){
-            return -1;
-        }
-        int  right=height(root.right);
-        if(right==-1)return -1;
-        if(Math.abs(left-right)>1)return -1;
-        return Math.max(left,right)+1;
+        return mypair;
+    }
+
+    public boolean isBalanced(TreeNode root) {
+        return is_Balanced(root).isbal;
     }
 }
