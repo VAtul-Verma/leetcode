@@ -22,11 +22,21 @@ class Solution {
     }
     public  void helper(List<Integer>ans,TreeNode root,int level){
             if(root==null)return;
-            if(level==ans.size()){
-                ans.add(root.val);
+        LinkedList<TreeNode>q=new LinkedList<>();
+        q.addLast(root);
+        while(q.size()!=0){
+            int size=q.size();
+            ans.add(q.getFirst().val);
+            while(size-->0){
+                TreeNode rn=q.removeFirst();
+                if(rn.right!=null){
+                    q.addLast(rn.right);
+                }
+                if(rn.left!=null){
+                    q.addLast(rn.left);
+                }
             }
-            helper(ans,root.right,level+1);
-            helper(ans,root.left,level+1);
+        }
             
         }
 }
