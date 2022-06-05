@@ -122,32 +122,40 @@ class Node
 class Tree
 {
     //Function to return list containing elements of left view of binary tree.
-    ArrayList<Integer> leftView(Node node)
+    ArrayList<Integer> leftView(Node root)
     {
       // Your code here
-      if(node==null)return new ArrayList<>();
-      ArrayList<Integer>ans=new ArrayList<>();
-      Queue<Node>q=new LinkedList<>();
-      q.add(node);
-      while(q.size()>0){
-          int size=q.size();
-          int cnt=1;
-          while(size-->0){
-              Node temp=q.poll();
-              
-              if(cnt==1){
-                  ans.add(temp.data);
-              }
-              cnt++;
-              if(temp.left!=null){
-                  q.add(temp.left);
-              }
-               if(temp.right!=null){
-                  q.add(temp.right);
-              }
-          }
-      }
-          
-      return ans;
+      
+       ArrayList<Integer>ans =new ArrayList<>();
+       if(root==null)return ans;
+       helper( ans,root);
+       return ans;
+    }
+    // public void helper( ArrayList<Integer>ans,Node root,int level){
+    //     if(root==null)return;
+    //     if(level==ans.size()){
+    //         ans.add(root.data);
+    //     }
+    //     helper(ans,root.left,level+1);
+    //     helper(ans,root.right,level+1);
+    // }
+    public void helper(ArrayList<Integer>ans,Node root){
+        LinkedList<Node>q=new LinkedList<>();
+        q.addLast(root);
+        while(q.size()!=0){
+            int size=q.size();
+            ans.add(q.getFirst().data);
+            while(size-->0){
+                Node rn=q.removeFirst();
+                if(rn.left!=null){
+                    q.addLast(rn.left);
+                    
+                }
+                if(rn.right!=null){
+                    q.addLast(rn.right);
+                }
+            }
+        }
+        
     }
 }
