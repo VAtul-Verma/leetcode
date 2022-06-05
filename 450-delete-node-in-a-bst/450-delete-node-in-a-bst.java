@@ -20,6 +20,12 @@ class Solution {
         }
         return root.val;
     }
+    public int getMax(TreeNode root){
+        while(root.right!=null){
+            root=root.right;
+        }
+        return root.val;
+    }
     public TreeNode deleteNode(TreeNode root, int key) {
         if(root==null)return null;
         if(root.val<key)root.right=deleteNode(root.right,key);
@@ -28,9 +34,15 @@ class Solution {
             if(root.left==null || root.right==null){
                 return root.left!=null?root.left:root.right;
             }else{
-                int minele=getmin(root.right);
-                root.val=minele;
-                root.right=deleteNode(root.right,minele);
+//                 int minele=getmin(root.right);
+//                 root.val=minele;
+//                 root.right=deleteNode(root.right,minele);
+                
+                //we can also use max of left 
+                  int maxele=getMax(root.left);
+                root.val=maxele;
+                root.left=deleteNode(root.left,maxele);
+                
                 
             }
         }
