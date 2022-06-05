@@ -132,18 +132,38 @@ class Solution{
     ArrayList<Integer> rightView(Node node) {
         //add code here.
         ArrayList<Integer>ans=new ArrayList<>();
-        helper(ans,node,0);
+        helper(ans,node);
         return ans;
            
     }
-    public static  void helper(  ArrayList<Integer>ans,Node root,int level){
-            if(root==null)return;
-            if(level==ans.size()){
-                ans.add(root.data);
-            }
-            helper(ans,root.right,level+1);
-            helper(ans,root.left,level+1);
+    // public static  void helper(  ArrayList<Integer>ans,Node root,int level){
+    //         if(root==null)return;
+    //         if(level==ans.size()){
+    //             ans.add(root.data);
+    //         }
+    //         helper(ans,root.right,level+1);
+    //         helper(ans,root.left,level+1);
             
+    //     }
+    
+    
+    public void helper( ArrayList<Integer>ans,Node root){
+        if(root==null)return;
+        LinkedList<Node>q=new LinkedList<>();
+        q.addLast(root);
+        while(q.size()!=0){
+            int size=q.size();
+            ans.add(q.getFirst().data);
+            while(size-->0){
+                Node rn=q.removeFirst();
+                if(rn.right!=null){
+                    q.addLast(rn.right);
+                }
+                if(rn.left!=null){
+                    q.addLast(rn.left);
+                }
+            }
         }
+    }
 }
 
