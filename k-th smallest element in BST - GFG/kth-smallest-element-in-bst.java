@@ -146,6 +146,6 @@ class Solution {
          }
      }
      
-     return ans==null?-1:ans.data;
+     return -1;
     }
 }
