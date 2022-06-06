@@ -10,46 +10,38 @@
 public class Codec {
 
     // Encodes a tree to a single string.
-    public String serialize(TreeNode root) {
-        if(root==null)return "";
-        LinkedList<TreeNode>q=new LinkedList<>();
-        StringBuilder sb=new StringBuilder();
-        q.addLast(root);
-        while(q.size()!=0){
-            TreeNode temp=q.removeFirst();
-            sb.append((temp!=null?temp.val:"#")+" ");
-            if(temp==null)continue;
-            q.addLast(temp.left);
-            q.addLast(temp.right);
+     public void  serialize(TreeNode root,StringBuilder sb) {
+        if(root==null){
+            sb.append("# ");
+            return ;
         }
+         sb.append(root.val+" ");
+         serialize(root.left,sb);
+         serialize(root.right,sb);
+    }
+    public String serialize(TreeNode root) {
+        StringBuilder sb=new StringBuilder();
+        serialize(root,sb);
         return sb.toString();
     }
 
     // Decodes your encoded data to tree.
+     public TreeNode deserialize(String[] data,int []id) {
+        int i=id[0];
+         if(i>=data.length ||data[i].equals("#")){
+             id[0]++;
+             return null;
+         }
+         TreeNode root=new TreeNode(Integer.parseInt(data[id[0]]));
+         id[0]++;
+        root.left= deserialize(data,id);
+         root.right=deserialize(data,id);
+         return root;
+    }
     public TreeNode deserialize(String data) {
-       if(data.length()==0)return null;
         String []arr=data.split(" ");
-         LinkedList<TreeNode>q=new LinkedList<>();
-        TreeNode root=new TreeNode(Integer.parseInt(arr[0]));
-        q.addLast(root);
-        int idx=1;
-        while(q.size()!=0){
-            TreeNode rnode=q.removeFirst();
-           if(!arr[idx].equals("#")){
-                TreeNode lchild=new TreeNode(Integer.parseInt(arr[idx]));
-                rnode.left=lchild;
-                q.addLast(lchild);
-            }
-            idx++;
-             if(!arr[idx].equals("#")){
-                TreeNode rchild=new TreeNode(Integer.parseInt(arr[idx]));
-                rnode.right=rchild;
-                q.addLast(rchild);
-            }
-            idx++;
-        }
-        return root;
-        
+        int []id=new int[1];
+        return deserialize(arr,id);
     }
 }
 
