@@ -121,7 +121,7 @@ class Solution {
          if(left==null){
             
              if(cnt==k){
-                 ans=curr;
+                 return curr.data;
                  
              }
             //  System.out.println(cnt+"-------"+root.data);
@@ -136,7 +136,7 @@ class Solution {
                  rmost.right=null;
                   
                    if(cnt==k){
-                 ans=curr;
+                return curr.data;
                  
              }
              cnt++;
