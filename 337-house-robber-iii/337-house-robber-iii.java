@@ -14,19 +14,19 @@
  * }
  */
 class Solution {
-    public int rob(TreeNode root) {
-        int []ans=robH(root);
-        return Math.max(ans[0],ans[1]);
-       
-    }
-     public int [] robH(TreeNode root) {
+    public int[] robhelper(TreeNode root) {
         if(root==null)return new int[2];
+        int []lr=robhelper(root.left);
+        int []rr=robhelper(root.right);
+        int []myres=new int[2];
+        myres[0]=lr[1]+rr[1]+root.val;  //rob occures on current node;
+        myres[1]=Math.max(lr[1],lr[0])+Math.max(rr[0],rr[1]);
+        return myres;
+    }
+    
+     public int rob(TreeNode root) {
+        int ans[]=robhelper(root);
+         return Math.max(ans[0],ans[1]);
          
-         int []lr=robH(root.left);
-         int []rr=robH(root.right);
-         int []myres=new int[2];
-         myres[0]=lr[1]+rr[1]+root.val;
-         myres[1]=Math.max(lr[0],lr[1])+Math.max(rr[0],rr[1]);
-         return myres;
     }
 }
