@@ -9,7 +9,7 @@ class Solution {
         int ans= helper(s,t,n,m,dp);
         return n+m-2*ans;
     }
-    public int helper(String s1,String s2,int n,int m,int [][]dp){
+    public int helper(String s1,String s2,int n,int m,int [][]dp){    //code is same as longest common subsequesnce
         if(n==0 || m==0){
           return dp[n][m]=0;
         }
