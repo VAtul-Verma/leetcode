@@ -3,20 +3,16 @@ class Solution {
         return atmostk(arr,k)-atmostk(arr,k-1);
     }
     public int atmostk(int []arr,int k){
-         HashMap<Integer,Integer>freq=new HashMap<>();
-        int n=arr.length,si=0,ei=0,cnt=0;
+         int []freq=new int[20000+1];
+        int n=arr.length,si=0,ei=0,cnt=0,ans=0;
         while(ei<n){
-            freq.put(arr[ei],freq.getOrDefault(arr[ei],0)+1);
-            ei++;
-            while(freq.size()>k){
-                freq.put(arr[si],freq.get(arr[si])-1);
-                if(freq.get(arr[si])==0){
-                    freq.remove(arr[si]);
-                }
-                si++;
+           if(freq[arr[ei++]]++==0)cnt++;
+            while(cnt>k){
+                if(freq[arr[si++]]--==1)cnt--;
+                
             }
-            cnt+=ei-si;
+            ans+=ei-si;
         }
-        return cnt;
+        return ans;
     }
 }
