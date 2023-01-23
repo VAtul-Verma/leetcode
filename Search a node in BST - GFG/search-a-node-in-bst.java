@@ -60,10 +60,16 @@ class BST {
     // Function to search a node in BST.
     boolean search(Node root, int data) {
         // Your code here
-        if(root==null)return false;
-        if(root.data==data)return true;
-        if(root.data>data)
-        return search(root.left,data);
-        else return search(root.right,data);
+        //iteratve solution
+        while(root!=null){
+            if(root.data==data){
+                return true;
+            }else if(root.data<data){
+                root=root.right;
+            }else{
+                root=root.left;
+            }
+        }
+        return false;
     }
 }
