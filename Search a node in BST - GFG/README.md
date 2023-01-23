@@ -1,7 +1,6 @@
 # Search a node in BST
 ## Easy
-<div class="problem-statement">
-                <p></p><p><span style="font-size:18px">Given a <strong>Binary Search Tree </strong>and a node value X, find if the node with value X is present in the BST or not.</span></p>
+<div class="problems_problem_content__Xm_eO"><p><span style="font-size:18px">Given a <strong>Binary Search Tree </strong>and a node value X, find if the node with value X is present in the BST or not.</span></p>
 
 <p><br>
 <span style="font-size:18px"><strong>Example 1:</strong></span></p>
@@ -45,5 +44,4 @@ You don't need to read input or print anything. Complete the function <strong>se
 <p><br>
 <span style="font-size:18px"><strong>Constraints:</strong><br>
 1 &lt;= Number of nodes &lt;= 10<sup>5</sup></span></p>
- <p></p>
-            </div>
+</div>
