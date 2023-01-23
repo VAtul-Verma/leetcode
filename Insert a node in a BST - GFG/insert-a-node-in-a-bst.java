@@ -1,4 +1,4 @@
-// { Driver Code Starts
+//{ Driver Code Starts
 // Initial Template for Java
 
 /*package whatever //do not write package name here */
@@ -20,7 +20,7 @@ class Node {
 class GFG {
     static Node buildTree(String str) {
         // Corner Case
-        if (str.length() == 0 || str.equals('N')) return null;
+        if (str.length() == 0 || str.equals("N")) return null;
         String[] s = str.split(" ");
 
         Node root = new Node(Integer.parseInt(s[0]));
@@ -73,7 +73,7 @@ class GFG {
             new BufferedReader(new InputStreamReader(System.in));
         int t = Integer.parseInt(br.readLine().trim());
         while (t > 0) {
-            String s = br.readLine();
+            String s = br.readLine().trim();
             Node root = buildTree(s);
             int key = Integer.parseInt(br.readLine().trim());
             Solution T = new Solution();
@@ -92,6 +92,7 @@ class GFG {
         inorder(root.right);
     }
 }
+
 // } Driver Code Ends
 
 
@@ -99,17 +100,17 @@ class GFG {
 
 class Solution {
     // Function to insert a node in a BST.
-    Node insert(Node root, int key) {
+    Node insert(Node root, int Key) {
         // your code here
         if(root==null){
-       return new Node(key);
-        
-        }if(root.data==key){
-            return root;
+            return new Node(Key);
         }
-       
-        if(root.data<key)root.right=insert(root.right,key);
-        else root.left=insert(root.left,key);
+        if(root.data>Key){
+            root.left=insert(root.left,Key);
+        }else if(root.data<Key){
+            root.right=insert(root.right,Key);
+        }
+        
         return root;
     }
 }
