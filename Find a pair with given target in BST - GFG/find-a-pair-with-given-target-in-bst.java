@@ -103,30 +103,22 @@ class Solution
 {
     // root : the root Node of the given BST
     // target : the target sum
-    public int isPairPresent(Node root, int sum)
+    public int isPairPresent(Node root, int target)
     {
         // Write your code here
-        ArrayList<Integer>ans=new ArrayList<>();
-        inordert(root,ans);
-        int i=0;
-        int j=ans.size()-1;
-        while(i<=j){
-            if(ans.get(i)+ans.get(j)==sum){
-                return 1;
-            }
-            else if(ans.get(i)+ans.get(j)<sum){
-                i++;
-            }else if(ans.get(i)+ans.get(j)>sum){
-                j--;
-            }
-        }
-        return 0;
+        HashSet<Integer>s=new HashSet<>();
+        return isPairPresent(root,target,s);
         
     }
-    public  void inordert(Node root,ArrayList<Integer>ans){
-        if(root==null)return;
-        inordert(root.left,ans);
-        ans.add(root.data);
-        inordert(root.right,ans);
+    
+     public int isPairPresent(Node root, int target,HashSet<Integer>s)
+    {
+        // Write your code here
+        if(root==null)return 0;
+        if(isPairPresent(root.left,target,s)==1)return 1;
+        if(s.contains(target-root.data))return 1;
+        else s.add(root.data);
+        return isPairPresent(root.right,target,s);
+        
     }
 }
