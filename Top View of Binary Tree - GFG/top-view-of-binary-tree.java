@@ -1,4 +1,4 @@
-// { Driver Code Starts
+//{ Driver Code Starts
 //Initial Template for JAVA
 
 import java.util.LinkedList; 
@@ -105,7 +105,8 @@ public class Tree {
                 t--;   
         }
     }
-}// } Driver Code Ends
+}
+// } Driver Code Ends
 
 
 //User function Template for Java
@@ -127,61 +128,39 @@ class Solution
 {
     //Function to return a list of nodes visible from the top view 
     //from left to right in Binary Tree.
-      public static class vpair {
-        Node node = null;
-        int vl = 0;
-
-        vpair(Node node, int vl) {
-            this.node = node;
-            this.vl = vl;
+    public static class Pair{
+        Node node;
+        int hd;
+        Pair(Node node,int hd){
+            this.node=node;
+            this.hd=hd;
         }
-    }
-
-    // {min,max}
-    public static void widthOfShadow(Node root, int vl, int[] minMax) {
-        if (root == null)
-            return;
-
-        minMax[0] = Math.min(minMax[0], vl);
-        minMax[1] = Math.max(minMax[1], vl);
-
-        widthOfShadow(root.left, vl - 1, minMax);
-        widthOfShadow(root.right, vl + 1, minMax);
+        
     }
     static ArrayList<Integer> topView(Node root)
     {
         // add your code
-          ArrayList<Integer> ans = new ArrayList<>();
-        if (root == null)
-            return ans;
-
-        int[] minMax = new int[2];
-        widthOfShadow(root, 0, minMax);
-        int width = minMax[1] - minMax[0] + 1;
-        for (int i = 0; i < width; i++)
-            ans.add(null);
-
-        LinkedList<vpair> que = new LinkedList<>();
-        que.addLast(new vpair(root, Math.abs(minMax[0])));
-
-        while (que.size() != 0) {
-            int size = que.size();
-            while (size-- > 0) {
-                vpair p = que.removeFirst();
-                Node node = p.node;
-                int vl = p.vl;
-
-                if (ans.get(vl) == null)
-                    ans.set(vl, node.data);
-
-                if (node.left != null)
-                    que.addLast(new vpair(node.left, vl - 1));
-                if (node.right != null)
-                    que.addLast(new vpair(node.right, vl + 1));
+        Queue<Pair>q=new LinkedList<>();
+        Map<Integer,Integer>m=new TreeMap<>();
+        q.add(new Pair(root,0));
+        while(!q.isEmpty()){
+            Pair temp=q.poll();
+            Node curr=temp.node;
+            int hd=temp.hd;
+            if(!m.containsKey(hd)){
+                m.put(hd,curr.data);
+            }
+            if(curr.left!=null){
+                q.add(new Pair(curr.left,hd-1));
+            }
+              if(curr.right!=null){
+                q.add(new Pair(curr.right,hd+1));
             }
         }
-
+        ArrayList<Integer>ans=new ArrayList<>();
+        for(int i:m.keySet()){
+            ans.add(m.get(i));
+        }
         return ans;
-        
     }
 }
